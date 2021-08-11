@@ -1,0 +1,10 @@
+.users {
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 10px;
+    column-gap: 10px;
+    width: 1250px;
+    padding: 10px;
+    margin: 0 auto 50px;
+    background: #c1b3b3;
+}
