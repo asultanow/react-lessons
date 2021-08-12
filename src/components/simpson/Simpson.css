@@ -1,0 +1,13 @@
+.simpson {
+    padding: 20px;
+    margin-bottom: 50px;
+}
+
+.simpson > img {
+    height: 250px;
+    float: right;
+}
+
+.clear-fix {
+    clear: both;
+}
