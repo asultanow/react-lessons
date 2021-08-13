@@ -1,7 +1,8 @@
 const baseUrl = 'https://jsonplaceholder.typicode.com/';
 
 function getUsers() {
-    return fetch(`${baseUrl}users`).then(response => response.json());
+    return fetch(`${baseUrl}users`)
+        .then(response => response.json());
 }
 
 function getPosts(userId) {
