@@ -1,0 +1,19 @@
+.wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 1400px;
+    padding: 30px;
+    margin: 0 auto;
+    background: #015792;
+}
+
+.users, .user-posts {
+    width: 655px;
+    color: #ffffff;
+}
+
+.user-posts {
+    padding: 30px;
+    background: #002049;
+}
