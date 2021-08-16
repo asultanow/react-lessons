@@ -1,22 +1,24 @@
+import './Address.css';
 import Geo from '../geo/Geo';
 
-export default function Address(props) {
+export default function Address({ address }) {
     const {
-        address: {
-            street,
-            suite,
-            city,
-            zipcode,
-            geo
-        }
-    } = props;
+        street,
+        suite,
+        city,
+        zipcode,
+        geo
+    } = address;
 
     return (
         <div className={'user_address'}>
-            <div>{street}</div>
-            <div>{suite}</div>
-            <div>{city}</div>
-            <div>{zipcode}</div>
+            <h3>Address</h3>
+            <p>
+                {street}<br/>
+                {suite}<br/>
+                {city}<br/>
+                {zipcode}
+            </p>
             <Geo geo={geo}/>
         </div>
     );

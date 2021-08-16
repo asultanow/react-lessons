@@ -1,3 +1,4 @@
+import './Users.css';
 import User from '../user/User';
 
 const usersList = [

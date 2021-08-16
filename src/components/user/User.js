@@ -1,33 +1,39 @@
+import './User.css';
 import Address from '../address/Address';
 
-export default function User(props) {
+export default function User({ user }) {
     const {
-        user: {
-            id,
-            name,
-            username,
-            email,
-            address,
-            phone,
-            website,
-            company: {
-                name: companyName,
-                catchPhrase,
-                bs
-            }
+        id,
+        name,
+        username,
+        email,
+        address,
+        phone,
+        website,
+        company: {
+            name: companyName,
+            catchPhrase,
+            bs
         }
-    } = props;
+    } = user;
 
     return (
         <div className={'user'}>
-            <div>{id}. {name}</div>
-            <div>{username}</div>
-            <div>{email}</div>
-            <div>{phone}</div>
-            <div>{website}</div>
-            <div>{companyName}</div>
-            <div>{catchPhrase}</div>
-            <div>{bs}</div>
+            <h2>{id}. {name}</h2>
+            <p>
+                {username}<br/>
+                {email}<br/>
+                {phone}<br/>
+                {website}
+            </p>
+            <div className={'user_company'}>
+                <h3>Company</h3>
+                <p>
+                    {companyName}<br/>
+                    {catchPhrase}<br/>
+                    {bs}
+                </p>
+            </div>
             <Address address={address}/>
         </div>
     );
