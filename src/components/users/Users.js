@@ -7,7 +7,7 @@ import Post from "../post/Post";
 export default function Users() {
     const [users, setUsers] = useState([]);
     const [user, setUser] = useState(null);
-    const [posts, setPosts ] = useState([]);
+    const [posts, setPosts] = useState([]);
 
     useEffect(() => {
         getUsers().then(value => setUsers([...value]));
