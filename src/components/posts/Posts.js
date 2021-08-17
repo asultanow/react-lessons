@@ -1,16 +1,19 @@
 import './Posts.css';
-import {getPosts} from '../../service';
 import {useEffect, useState} from "react";
+import {getPosts} from '../../services/data.fetch.service';
+import {getPostsAxios} from "../../services/data.axios.service";
 import Post from "../post/Post";
 
 export default function Posts({ userId }) {
     const [posts, setPosts] = useState([]);
+    const [postsAxios, setPostsAxios] = useState([]);
 
     useEffect(() => {
         getPosts(userId).then(value => setPosts([...value]));
-    }, []);
+        getPostsAxios(userId).then(value => setPostsAxios([...value]));
+    }, [userId]);
 
-    console.log(posts);
+    console.log(postsAxios, userId);
 
     return (
         <div className={'posts'}>

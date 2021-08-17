@@ -2,12 +2,7 @@ import './Post.css';
 import Comments from '../comments/Comments';
 
 export default function Post({ post }) {
-    const {
-        id,
-        userId,
-        title,
-        body
-    } = post;
+    const { id, userId, title, body } = post;
 
     return (
         <div className={'post'}>

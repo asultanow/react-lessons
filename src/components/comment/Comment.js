@@ -1,13 +1,7 @@
 import './Comment.css';
 
-export default function Comment({comment}) {
-    const {
-        id,
-        postId,
-        name,
-        email,
-        body
-    } = comment;
+export default function Comment({ comment }) {
+    const { id, postId, name, email, body } = comment;
 
     return (
         <div className={'comment'}>
