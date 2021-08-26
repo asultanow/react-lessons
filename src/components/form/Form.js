@@ -3,102 +3,124 @@ import {useState, createRef} from "react";
 import {createCar} from "../../services/car.service";
 
 export default function Form() {
-    const [formState, setFormState] = useState({model: '', price: '', year: ''});
-    const [isDisabled, setIsDisabled] = useState(true);
+    const [car, setCar] = useState({model: '', price: '', year: ''});
+    const [btnIsDisabled, setBtnIsDisabled] = useState(true);
     const refObject = createRef();
 
+    console.log(car);
+
+    const [modelWarning, setModelWarning] = useState('');
+    const [priceWarning, setPriceWarning] = useState('');
+    const [yearWarning, setYearWarning] = useState('');
+
+    function validateCar() {
+        const {model, price, year} = car;
+
+        console.log(model);
+        console.log(price);
+        console.log(year);
+
+        setModelWarning('');
+        setPriceWarning('');
+        setYearWarning('');
+
+        const modelIsValid = /^[a-zA-Z]{1,20}$/.test(model);
+
+        if (model === '') {
+            setModelWarning('this field is required');
+        } else if (!modelIsValid) {
+            setModelWarning('incorrect model');
+        }
+
+        const priceIsValid = price >= 0;
+
+        if (price === '') {
+            setPriceWarning('this field is required');
+        } else if (!priceIsValid) {
+            setPriceWarning('incorrect price');
+        }
+
+        const yearIsValid = year >= 1990 && year <= 2021;
+
+        if (year === '') {
+            setYearWarning('this field is required');
+        } else if (!yearIsValid) {
+            setYearWarning('incorrect year');
+        }
+    }
+
     const onChangeTextInputValue = (ev) => {
-        setFormState({...formState, [ev.target.name]: ev.target.value});
-        console.log(formState);
+        setCar({...car, [ev.target.name]: ev.target.value});
+
+        console.log(car);
     };
 
     const onChangeNumberInputValue = (ev) => {
         let value = ev.target.value;
 
         if (value !== '') {
-            value = +ev.target.value;
+            value = +value;
         }
 
-        setFormState({...formState, [ev.target.name]: value});
-        console.log(formState);
+        setCar({...car, [ev.target.name]: value});
+
+        console.log(car);
     };
 
     const onSubmitForm = (ev) => {
         ev.preventDefault();
-        console.log(formState);
-        createCar(formState).then(value => {
-            console.log(value);
-            console.log(value.id);
-        });
-    };
+        validateCar();
 
-    const validateModel = (ev) => {
-        const model = ev.target.value;
-        const isValid = /^[A-Za-z]{1,20}$/.test(model);
+        console.log(car);
 
-        if (!isValid) {
-            setFormState({...formState, model: 'invalid value'});
-            return;
-        }
-
-        validateAllFieldsAreFilled();
-    };
-
-    const validatePrice = (ev) => {
-        const price = +ev.target.value;
-        console.log(typeof price);
-        console.log(isNaN(price));
-        console.log(+'');
-
-        if (price < 0) {
-            setFormState({...formState, price: 'invalid value'});
-            return;
-        }
-
-        validateAllFieldsAreFilled();
-    };
-
-    const validateYear = (ev) => {
-        const year = +ev.target.value;
-
-        if (year < 1990 || year > 2021) {
-            setFormState({...formState, year: 'invalid value'});
-            return;
-        }
-
-        validateAllFieldsAreFilled();
-    };
-
-    const validateAllFieldsAreFilled = () => {
-        let isValid = true;
-
-        for (const key in formState) {
-            if (formState[key] === '') {
-                isValid = false;
-            }
-        }
-
-        if (isValid) {
-            setIsDisabled(false);
-            console.log(formState);
-        }
+        // createCar(car).then(value => {
+        //     console.log(value);
+        // });
     };
 
     return (
         <form onSubmit={onSubmitForm} ref={refObject}>
-            <label>model:
-                <input type={'text'} name={'model'} value={formState.model} onChange={onChangeTextInputValue}
-                       onBlur={validateModel}/>
-            </label>
-            <label>price:
-                <input type={'number'} name={'price'} value={formState.price} onChange={onChangeNumberInputValue}
-                       onBlur={validatePrice}/>
-            </label>
-            <label>year:
-                <input type={'number'} name={'year'} value={formState.year} onChange={onChangeNumberInputValue}
-                       onBlur={validateYear}/>
-            </label>
-            <input type={'submit'} disabled={isDisabled}/>
+            <div className={'wrapper'}>
+                <div className={'label'}>
+                    <label htmlFor={'model'}>Model:</label>
+                </div>
+                <div className={'input-box'}>
+                    <div className={'input'}>
+                        <input type={'text'} id={'model'} name={'model'} value={car.model}
+                               onChange={onChangeTextInputValue} onBlur={null}/>
+                    </div>
+                    <div className={'warning'}>
+                        {modelWarning}
+                    </div>
+                </div>
+                <div className={'label'}>
+                    <label htmlFor={'price'}>Price:</label>
+                </div>
+                <div className={'input-box'}>
+                    <div className={'input'}>
+                        <input type={'number'} id={'price'} name={'price'} value={car.price}
+                               onChange={onChangeNumberInputValue} onBlur={null}/>
+                    </div>
+                    <div className={'warning'}>
+                        {priceWarning}
+                    </div>
+                </div>
+                <div className={'label'}>
+                    <label htmlFor={'year'}>Year:</label>
+                </div>
+                <div className={'input-box'}>
+                    <div className={'input'}>
+                        <input type={'number'} id={'year'} name={'year'} value={car.year}
+                               onChange={onChangeNumberInputValue} onBlur={null}/>
+                    </div>
+                    <div className={'warning'}>
+                        {yearWarning}
+                    </div>
+                </div>
+                <div className={'save-btn-box'}>
+                    <input type={'submit'} value={'Save'} disabled={false}/>
+                </div>
+            </div>
         </form>
     );
 }

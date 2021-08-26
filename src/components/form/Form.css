@@ -1,0 +1,50 @@
+input {
+    width: 100%;
+    font-size: 16px;
+}
+
+input[type='submit'] {
+    border: none;
+    border-radius: 3px;
+    padding: 4px 10px;
+    background: #0f860f;
+    color: #ffffff;
+    font-weight: bold;
+    transition: background-color 0.8s;
+}
+
+input[type='submit']:hover {
+    background: #3ddc3d;
+    transition: background-color 0.2s;
+}
+
+input[type='submit']:disabled {
+    background: #6b6b6b;
+    color: #afadad;
+}
+
+.wrapper {
+    display: flex;
+    width: 1400px;
+    padding: 20px 30px;
+    background: silver;
+}
+
+.label {
+    padding-top: 4px;
+    margin-right: 10px;
+}
+
+.input-box {
+    width: 320px;
+    margin-right: 40px;
+}
+
+.warning {
+    margin-top: 5px;
+    color: red;
+}
+
+.save-btn-box {
+    margin-left: 20px;
+}

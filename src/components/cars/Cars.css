@@ -1,0 +1,10 @@
+.cars {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    row-gap: 20px;
+    column-gap: 20px;
+    width: 1400px;
+    margin-top: 20px;
+}
