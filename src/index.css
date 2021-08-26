@@ -2,3 +2,17 @@
     box-sizing: border-box;
     font-family: 'Arial', sans-serif;
 }
+
+.users, .posts, .comments {
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 10px;
+    column-gap: 10px;
+    margin-top: 10px;
+}
+
+.user, .post, .comment {
+    width: 342px;
+    padding: 20px;
+    background: #f2f2f0;
+}
