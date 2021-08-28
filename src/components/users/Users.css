@@ -1,0 +1,12 @@
+.users {
+    display: flex;
+    align-items: flex-start;
+}
+
+.users-box {
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 20px;
+    column-gap: 20px;
+    width: 750px;
+}

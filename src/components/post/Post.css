@@ -1,0 +1,26 @@
+.post {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 340px;
+    padding: 0 20px 20px;
+    background: #c5e3cb;
+}
+
+.post-details-link {
+    display: block;
+    width: 150px;
+    padding: 6px;
+    background: #002049;
+    color: #ffffff;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.6s;
+}
+
+.post-details-link:hover {
+    background: #2c4c75;
+    text-decoration: underline;
+    transition: background-color 0.2s;
+}

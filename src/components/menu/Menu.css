@@ -1,0 +1,38 @@
+.menu {
+    width: 150px;
+}
+
+.menu_item {
+    display: block;
+    width: 100px;
+    height: 100px;
+    border-radius: 100px;
+    font-size: 20px;
+    text-align: center;
+    line-height: 100px;
+    text-decoration: none;
+    color: #ffffff;
+    transition: background-color 0.6s;
+}
+
+.menu_item:hover {
+    text-decoration: underline;
+    transition: background-color 0.2s;
+}
+
+.users-link {
+    background: #015792;
+}
+
+.users-link:hover {
+    background: #3e7eab;
+}
+
+.posts-link {
+    margin-top: 20px;
+    background: #fe5f01;
+}
+
+.posts-link:hover {
+    background: #ff9a5e;
+}
