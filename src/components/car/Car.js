@@ -1,7 +1,6 @@
 import './Car.css';
 
-export default function Car({car}) {
-    const {id, model, price, year} = car;
+export default function Car({car: {id, model, price, year}}) {
 
     return (
         <div className={'car'}>

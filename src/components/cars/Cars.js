@@ -7,20 +7,13 @@ export default function Cars() {
     const [cars, setCars] = useState([]);
 
     useEffect(() => {
-        getCars().then(value => {
-            console.log(value);
-            setCars([...value]);
-            console.log(cars);
-        });
+        getCars().then(value => setCars([...value]));
     }, []);
-
-    cars.sort((a, b) => b.id - a.id);
-    console.log('cars: ', cars);
 
     return (
         <div className={'cars'}>
             {
-                cars.map(car => <Car key={car.id} car={car}/>)
+                cars.sort((a, b) => b.id - a.id).map(car => <Car key={car.id} car={car}/>)
             }
         </div>
     );

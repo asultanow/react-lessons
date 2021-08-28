@@ -3,56 +3,28 @@ import {useState, createRef} from "react";
 import {createCar} from "../../services/car.service";
 
 export default function Form() {
-    const [car, setCar] = useState({model: '', price: '', year: ''});
-    const [btnIsDisabled, setBtnIsDisabled] = useState(true);
     const refObject = createRef();
-
-    console.log(car);
-
+    const initCar = {model: '', price: '', year: ''};
+    const [car, setCar] = useState(initCar);
     const [modelWarning, setModelWarning] = useState('');
     const [priceWarning, setPriceWarning] = useState('');
     const [yearWarning, setYearWarning] = useState('');
 
-    function validateCar() {
-        const {model, price, year} = car;
+    const onSubmitForm = (ev) => {
+        ev.preventDefault();
+        const carIsValid = validateCar();
 
-        console.log(model);
-        console.log(price);
-        console.log(year);
+        if (carIsValid) {
+            createCar(car).then(value => {
+                console.log(value);
+            });
 
-        setModelWarning('');
-        setPriceWarning('');
-        setYearWarning('');
-
-        const modelIsValid = /^[a-zA-Z]{1,20}$/.test(model);
-
-        if (model === '') {
-            setModelWarning('this field is required');
-        } else if (!modelIsValid) {
-            setModelWarning('incorrect model');
+            setCar(initCar);
         }
-
-        const priceIsValid = price >= 0;
-
-        if (price === '') {
-            setPriceWarning('this field is required');
-        } else if (!priceIsValid) {
-            setPriceWarning('incorrect price');
-        }
-
-        const yearIsValid = year >= 1990 && year <= 2021;
-
-        if (year === '') {
-            setYearWarning('this field is required');
-        } else if (!yearIsValid) {
-            setYearWarning('incorrect year');
-        }
-    }
+    };
 
     const onChangeTextInputValue = (ev) => {
         setCar({...car, [ev.target.name]: ev.target.value});
-
-        console.log(car);
     };
 
     const onChangeNumberInputValue = (ev) => {
@@ -63,62 +35,78 @@ export default function Form() {
         }
 
         setCar({...car, [ev.target.name]: value});
-
-        console.log(car);
     };
 
-    const onSubmitForm = (ev) => {
-        ev.preventDefault();
-        validateCar();
-
+    const validateCar = () => {
         console.log(car);
 
-        // createCar(car).then(value => {
-        //     console.log(value);
-        // });
-    };
+        const {model, price, year} = car;
+
+        setModelWarning('');
+        setPriceWarning('');
+        setYearWarning('');
+
+        const modelIsValid = /^[a-zA-Z]{1,20}$/.test(model);
+
+        if (model === '') {
+            setModelWarning('This field is required');
+        } else if (!modelIsValid) {
+            setModelWarning('Model must contain from 1 to 20 alphabetic characters');
+        }
+
+        const priceIsValid = price >= 0;
+
+        if (price === '') {
+            setPriceWarning('This field is required');
+        } else if (!priceIsValid) {
+            setPriceWarning('Price cannot be less than 0');
+        }
+
+        const currentYear = new Date().getFullYear();
+        const yearIsValid = year >= 1990 && year <= currentYear;
+
+        if (year === '') {
+            setYearWarning('This field is required');
+        } else if (!yearIsValid) {
+            setYearWarning('Year cannot be less than 1990 or greater than current year');
+        }
+
+        return (
+            model !== '' && modelIsValid &&
+            price !== '' && priceIsValid &&
+            year !== '' && yearIsValid
+        );
+    }
 
     return (
         <form onSubmit={onSubmitForm} ref={refObject}>
             <div className={'wrapper'}>
-                <div className={'label'}>
+                <div className={'label-box'}>
                     <label htmlFor={'model'}>Model:</label>
                 </div>
                 <div className={'input-box'}>
-                    <div className={'input'}>
-                        <input type={'text'} id={'model'} name={'model'} value={car.model}
-                               onChange={onChangeTextInputValue} onBlur={null}/>
-                    </div>
-                    <div className={'warning'}>
-                        {modelWarning}
-                    </div>
+                    <input type={'text'} id={'model'} name={'model'} value={car.model}
+                           onChange={onChangeTextInputValue} onBlur={null}/>
+                    {modelWarning && <p className={'warning'}>{modelWarning}</p>}
                 </div>
-                <div className={'label'}>
+                <div className={'label-box'}>
                     <label htmlFor={'price'}>Price:</label>
                 </div>
                 <div className={'input-box'}>
-                    <div className={'input'}>
-                        <input type={'number'} id={'price'} name={'price'} value={car.price}
-                               onChange={onChangeNumberInputValue} onBlur={null}/>
-                    </div>
-                    <div className={'warning'}>
-                        {priceWarning}
-                    </div>
+                    <input type={'number'} id={'price'} name={'price'} value={car.price}
+                           onChange={onChangeNumberInputValue} onBlur={null}/>
+                    {priceWarning && <p className={'warning'}>{priceWarning}</p>}
                 </div>
-                <div className={'label'}>
+                <div className={'label-box'}>
                     <label htmlFor={'year'}>Year:</label>
                 </div>
                 <div className={'input-box'}>
-                    <div className={'input'}>
-                        <input type={'number'} id={'year'} name={'year'} value={car.year}
-                               onChange={onChangeNumberInputValue} onBlur={null}/>
-                    </div>
-                    <div className={'warning'}>
-                        {yearWarning}
-                    </div>
+                    <input type={'number'} id={'year'} name={'year'} value={car.year}
+                           onChange={onChangeNumberInputValue} onBlur={null}/>
+                    {yearWarning && <p className={'warning'}>{yearWarning}</p>}
                 </div>
-                <div className={'save-btn-box'}>
-                    <input type={'submit'} value={'Save'} disabled={false}/>
+                <div className={'submit-input-box'}>
+                    <input className={'submit-btn'} type={'submit'} value={'Save'} disabled={false}/>
                 </div>
             </div>
         </form>
