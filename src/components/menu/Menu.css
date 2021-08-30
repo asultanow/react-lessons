@@ -12,12 +12,12 @@
     line-height: 100px;
     text-decoration: none;
     color: #ffffff;
-    transition: background-color 0.6s;
+    transition: background-color 0.5s;
 }
 
 .menu_item:hover {
     text-decoration: underline;
-    transition: background-color 0.2s;
+    transition: background-color 0.1s;
 }
 
 .users-link {
