@@ -3,6 +3,10 @@
     font-family: 'Arial', sans-serif;
 }
 
+body {
+    margin: 0;
+}
+
 .users, .posts, .comments {
     display: flex;
     flex-wrap: wrap;
