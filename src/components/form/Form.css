@@ -16,12 +16,12 @@ input {
     background: #0f860f;
     color: #ffffff;
     font-weight: bold;
-    transition: background-color 0.6s;
+    transition: background-color 0.5s;
 }
 
 .submit-btn:hover {
     background: #3ddc3d;
-    transition: background-color 0.2s;
+    transition: background-color 0.1s;
 }
 
 .label-box {

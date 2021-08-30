@@ -2,7 +2,8 @@ import './Form.css';
 import {useState, createRef} from "react";
 import {createCar} from "../../services/car.service";
 
-export default function Form() {
+
+export default function Form({getUpdatedCars}) {
     const refObject = createRef();
     const initCar = {model: '', price: '', year: ''};
     const [car, setCar] = useState(initCar);
@@ -17,6 +18,10 @@ export default function Form() {
         if (carIsValid) {
             createCar(car).then(value => {
                 console.log(value);
+
+                if (value.id) {
+                    getUpdatedCars();
+                }
             });
 
             setCar(initCar);
@@ -38,8 +43,6 @@ export default function Form() {
     };
 
     const validateCar = () => {
-        console.log(car);
-
         const {model, price, year} = car;
 
         setModelWarning('');
@@ -86,7 +89,7 @@ export default function Form() {
                 </div>
                 <div className={'input-box'}>
                     <input type={'text'} id={'model'} name={'model'} value={car.model}
-                           onChange={onChangeTextInputValue} onBlur={null}/>
+                           onChange={onChangeTextInputValue}/>
                     {modelWarning && <p className={'warning'}>{modelWarning}</p>}
                 </div>
                 <div className={'label-box'}>
@@ -94,7 +97,7 @@ export default function Form() {
                 </div>
                 <div className={'input-box'}>
                     <input type={'number'} id={'price'} name={'price'} value={car.price}
-                           onChange={onChangeNumberInputValue} onBlur={null}/>
+                           onChange={onChangeNumberInputValue}/>
                     {priceWarning && <p className={'warning'}>{priceWarning}</p>}
                 </div>
                 <div className={'label-box'}>
@@ -102,11 +105,11 @@ export default function Form() {
                 </div>
                 <div className={'input-box'}>
                     <input type={'number'} id={'year'} name={'year'} value={car.year}
-                           onChange={onChangeNumberInputValue} onBlur={null}/>
+                           onChange={onChangeNumberInputValue}/>
                     {yearWarning && <p className={'warning'}>{yearWarning}</p>}
                 </div>
                 <div className={'submit-input-box'}>
-                    <input className={'submit-btn'} type={'submit'} value={'Save'} disabled={false}/>
+                    <input className={'submit-btn'} type={'submit'} value={'Save Car'}/>
                 </div>
             </div>
         </form>
