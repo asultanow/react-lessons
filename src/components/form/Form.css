@@ -1,0 +1,25 @@
+.todo-form {
+    padding: 20px;
+    background: silver;
+}
+
+.form-wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.title {
+    width: 300px;
+}
+
+.description {
+    width: 640px;
+}
+
+.submit-btn, .delete-all-btn {
+    width: 120px;
+}
+
+.delete-all-btn {
+    margin-left: 20px;
+}
