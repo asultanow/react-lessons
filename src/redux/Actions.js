@@ -1,14 +1,14 @@
 import {CHANGE_PROPERTY, CREATE_TODO, SELECT_TODO_TO_UPDATE, UPDATE_TODO, DELETE_TODO, DELETE_ALL} from "./ActionTypes";
 
-const changeProperty = payload => ({type: CHANGE_PROPERTY, payload});
+const changeProperty = property => ({type: CHANGE_PROPERTY, payload: property});
 
 const createTodo = () => ({type: CREATE_TODO});
 
-const selectTodoToUpdate = payload => ({type: SELECT_TODO_TO_UPDATE, payload});
+const selectTodoToUpdate = todo => ({type: SELECT_TODO_TO_UPDATE, payload: todo});
 
 const updateTodo = () => ({type: UPDATE_TODO});
 
-const deleteTodo = payload => ({type: DELETE_TODO, payload});
+const deleteTodo = todoId => ({type: DELETE_TODO, payload: todoId});
 
 const deleteAll = () => ({type: DELETE_ALL})
 

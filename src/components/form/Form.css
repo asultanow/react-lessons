@@ -1,6 +1,6 @@
 .todo-form {
     padding: 20px;
-    background: silver;
+    background: #ededed;
 }
 
 .form-wrapper {
@@ -10,16 +10,23 @@
 
 .title {
     width: 300px;
+    margin-left: 4px;
 }
 
 .description {
-    width: 640px;
-}
-
-.submit-btn, .delete-all-btn {
-    width: 120px;
+    width: 660px;
+    margin-left: 4px;
 }
 
 .delete-all-btn {
     margin-left: 20px;
+    background: #ed5564;
+}
+
+.bg-green {
+    background: #42cb6f;
+}
+
+.bg-yellow {
+    background: #fcce54;
 }

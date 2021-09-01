@@ -2,45 +2,51 @@ import {CHANGE_PROPERTY, CREATE_TODO, SELECT_TODO_TO_UPDATE, DELETE_TODO, DELETE
 
 const todos = JSON.parse(localStorage.getItem('todos')) || [];
 
-console.log(todos);
-
 const initialTodo = {id: 0, title: '', description: ''};
-const initialState = {todos, todo: initialTodo, isTodoToCreate: true};
+const initialState = {todos, todo: initialTodo, isTodoToUpdate: false};
+
 export const reducer = (state = initialState, action) => {
-    console.log(state);
-    console.log(action);
+
+    const {type, payload} = action;
+    let {todos, todo, isTodoToUpdate} = state;
 
     let updatedTodos;
-    switch (action.type) {
+
+    switch (type) {
+
         case CHANGE_PROPERTY:
-            return {...state, todo: {...state.todo, ...action.payload}};
+            return {...state, todo: {...todo, ...payload}};
 
         case CREATE_TODO:
-            const id = state.todos.length !== 0 ? state.todos[state.todos.length - 1].id + 1 : 1;
-            updatedTodos = [...state.todos, {...state.todo, id}];
+            const id = todos.length !== 0 ? todos[todos.length - 1].id + 1 : 1;
+            updatedTodos = [...todos, {...todo, id}];
+
             localStorage.setItem('todos', JSON.stringify(updatedTodos));
 
             return {...state, todos: updatedTodos, todo: {...initialTodo}};
 
         case SELECT_TODO_TO_UPDATE:
-            return {...state, todo: {...action.payload}, isTodoToCreate: false};
+            return {...state, todo: {...payload}, isTodoToUpdate: true};
 
         case UPDATE_TODO:
-            updatedTodos = [...state.todos.map(todo => todo.id === state.todo.id ? {...state.todo} : todo)];
+            updatedTodos = [...todos.map(item => item.id === todo.id ? {...todo} : item)];
+
             localStorage.setItem('todos', JSON.stringify(updatedTodos));
 
-            return {...state, todos: updatedTodos, todo: {...initialTodo}, isTodoToCreate: true};
+            return {...state, todos: updatedTodos, todo: {...initialTodo}, isTodoToUpdate: false};
 
         case DELETE_TODO:
-            updatedTodos = [...state.todos.filter(todo => todo.id !== action.payload)];
+            updatedTodos = [...todos.filter(item => item.id !== payload)];
+            isTodoToUpdate = todo.id === payload ? false : isTodoToUpdate;
+
             localStorage.setItem('todos', JSON.stringify(updatedTodos));
 
-            return {...state, todos: updatedTodos};
+            return {...state, todos: updatedTodos, isTodoToUpdate: isTodoToUpdate};
 
         case DELETE_ALL:
             localStorage.removeItem('todos');
 
-            return {...state, todos: []};
+            return {...state, todos: [], isTodoToUpdate: false};
 
         default:
             return state;
