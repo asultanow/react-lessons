@@ -10,8 +10,6 @@ export default function Users() {
 
     const {users} = state;
 
-    console.log(state);
-
     useEffect(() => {
         dispatch(fetchUsers());
     }, []);
@@ -23,7 +21,6 @@ export default function Users() {
                     <div key={user.id} className={'user'}>
                         <h3>{user.id}. {user.name}</h3>
                         <p>{user.email}</p>
-                        <p>{user.phone}</p>
                     </div>
             ))
             }

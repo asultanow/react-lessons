@@ -1,3 +1,4 @@
+import "./Form.css";
 import {createRef} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {addUser} from "../../services/user.api.service";
@@ -15,24 +16,23 @@ export default function Form() {
 
     const onAddUser = ev => {
         ev.preventDefault();
-
         const userId = users.length + 1;
+
         dispatch(addUser(user, userId));
     };
 
     return (
         <div className={'user-form'}>
             <form ref={refObject} onSubmit={onAddUser}>
-                <label>Name:
-                    <input type="text" name={'name'} value={user.name} onChange={onChangeUserProp}/>
-                </label>
-                <label>Email:
-                    <input type="text" name={'email'} value={user.email} onChange={onChangeUserProp}/>
-                </label>
-                <label>Phone:
-                    <input type="text" name={'phone'} value={user.phone} onChange={onChangeUserProp}/>
-                </label>
-                <button>Save</button>
+                <div className={'wrapper'}>
+                    <label>Name:
+                        <input type="text" name={'name'} value={user.name} onChange={onChangeUserProp}/>
+                    </label>
+                    <label>Email:
+                        <input type="text" name={'email'} value={user.email} onChange={onChangeUserProp}/>
+                    </label>
+                    <button type={'submit'}>Save</button>
+                </div>
             </form>
         </div>
     );

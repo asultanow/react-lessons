@@ -1,0 +1,16 @@
+button {
+    font-size: inherit;
+}
+
+input {
+    width: 583px;
+    margin-left: 5px;
+    font-size: inherit;
+}
+
+.wrapper {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 20px 0;
+    background: silver;
+}
