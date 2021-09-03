@@ -10,7 +10,7 @@ const fetchUsers = () => async dispatch => {
 
 const addUser = (user, userId) => async dispatch => {
 
-    const addedUser = (await fetch(`${baseUrl}/users`, {
+    const addedUser = await (await fetch(`${baseUrl}/users`, {
         method: 'POST',
         body: JSON.stringify(user),
         headers: {
