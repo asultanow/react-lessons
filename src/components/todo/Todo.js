@@ -1,5 +1,5 @@
 import './Todo.css';
-import {deleteTodo, selectTodoToUpdate} from "../../redux/Actions";
+import {deleteTodo, selectTodoToUpdate} from "../../redux/actions";
 import {useDispatch} from "react-redux";
 
 export default function Todo({todo}) {

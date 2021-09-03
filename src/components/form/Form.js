@@ -1,7 +1,7 @@
 import './Form.css';
 import {createRef} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {changeProperty, createTodo, updateTodo, deleteAll} from "../../redux/Actions";
+import {changeProperty, createTodo, updateTodo, deleteAll, clearForm} from "../../redux/actions";
 
 export default function Form() {
 
@@ -9,11 +9,9 @@ export default function Form() {
     const state = useSelector(state => state);
     const dispatch = useDispatch();
 
-    const {todo, isTodoToUpdate} = state;
-    const submitButtonText = isTodoToUpdate ? 'Update' : 'Create';
-    const submitButtonBgColor = isTodoToUpdate ? 'bg-yellow' : 'bg-green';
-
-    console.log(isTodoToUpdate);
+    const {todo, isTodoSelectedToUpdate, isFormEmpty} = state;
+    const submitButtonText = isTodoSelectedToUpdate ? 'Update' : 'Create';
+    const submitButtonBgColor = isTodoSelectedToUpdate ? 'bg-yellow' : 'bg-green';
 
     const onChangeTodo = ev => dispatch(changeProperty({[ev.target.name]: ev.target.value}));
 
@@ -29,9 +27,11 @@ export default function Form() {
 
     const onDeleteAll = () => dispatch(deleteAll());
 
+    const onClearForm = () => dispatch(clearForm());
+
     return (
         <div className={'todo-form'}>
-            <form ref={refObject} onSubmit={isTodoToUpdate ? onUpdateTodo : onCreateTodo}>
+            <form ref={refObject} onSubmit={isTodoSelectedToUpdate ? onUpdateTodo : onCreateTodo}>
                 <div className={'form-wrapper'}>
                     <div>
                         <label>Title:
@@ -47,7 +47,11 @@ export default function Form() {
                     </div>
                     <div>
                         <button type={'submit'} className={`submit-btn ${submitButtonBgColor}`}>{submitButtonText}</button>
-                        <button type={'button'} className={'delete-all-btn'} onClick={onDeleteAll}>Delete All</button>
+                        {
+                            !isFormEmpty || isTodoSelectedToUpdate ?
+                                <button type={'button'} className={'cancel-btn'} onClick={onClearForm}>Cancel</button> :
+                                <button type={'button'} className={'delete-all-btn'} onClick={onDeleteAll}>Delete All</button>
+                        }
                     </div>
                 </div>
             </form>

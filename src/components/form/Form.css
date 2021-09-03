@@ -23,6 +23,11 @@
     background: #ed5564;
 }
 
+.cancel-btn {
+    margin-left: 20px;
+    background: #cb93ee;
+}
+
 .bg-green {
     background: #42cb6f;
 }

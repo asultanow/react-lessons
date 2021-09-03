@@ -2,13 +2,14 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 272px;
-    padding: 20px;
+    width: 695px;
+    padding: 4px 20px 20px;
     background: #ededed;
 }
 
 .edit-btn {
     background: #5c9ded;
+    margin-left: 423px;
 }
 
 .delete-btn {
